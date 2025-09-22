@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Categorías</title>
+</head>
+<body>
+	<h1>Categorías de Trips</h1>
+	<ol>
+		<li th:each="tempCat : ${lista}" th:text=${tempCat}></li>
+	</ol>
+</body>
+</html>
