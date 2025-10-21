@@ -14,7 +14,6 @@
 			<td>Fecha Publicación</td>
 			<td>Costo</td>
 			<td>Descripción</td>
-			<td>Dirección</td>
 			<td>Calificación</td>
 		</tr>
 		<tr th:each="trip : ${trips}">
@@ -23,7 +22,6 @@
 			<td th:text="${trip.fecha}"></td>
 			<td th:text="${trip.costo}"></td>
 			<td th:text="${trip.descripcion}"></td>
-			<td th:text="${trip.direccion}"></td>
 			<td th:text="${trip.calificacion}"></td>
 		</tr>
 	</table>

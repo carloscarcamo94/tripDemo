@@ -1,12 +1,21 @@
 package com.TripDemo.model;
 
+import java.util.Date;
+
 public class Categoria{
 	
 	private int id;
 	private String nomCategoria;
 	private String descripcion;
 	private boolean activo;
+	private Date fecha;
 	
+	public Date getFecha() {
+		return fecha;
+	}
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
 	public int getId() {
 		return id;
 	}

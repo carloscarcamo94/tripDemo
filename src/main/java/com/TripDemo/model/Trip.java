@@ -7,11 +7,32 @@ public class Trip{
 	private Integer id;
 	private String nomTrip;
 	private String descripcion;
-	private Date fecha;
 	private Double costo;
-	private String direccion;
 	private int calificacion;
+	private String imagen;
+	private String detalles;
+	private boolean activo;
+	private Date fecha;
+
 	
+	public String getImagen() {
+		return imagen;
+	}
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+	public String getDetalles() {
+		return detalles;
+	}
+	public void setDetalles(String detalles) {
+		this.detalles = detalles;
+	}
+	public boolean isActivo() {
+		return activo;
+	}
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -42,12 +63,6 @@ public class Trip{
 	public void setCosto(Double costo) {
 		this.costo = costo;
 	}
-	public String getDireccion() {
-		return direccion;
-	}
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
 	public int getCalificacion() {
 		return calificacion;
 	}
@@ -59,7 +74,7 @@ public class Trip{
 	@Override
 	public String toString() {
 		return "Trip [id=" + id + ", nomTrip=" + nomTrip + ", descripcion=" + descripcion + ", fecha=" + fecha
-				+ ", costo=" + costo + ", direccion=" + direccion + ", calificacion=" + calificacion + "]";
+				+ ", costo=" + costo + ", calificacion=" + calificacion + "]";
 	}
 
 	

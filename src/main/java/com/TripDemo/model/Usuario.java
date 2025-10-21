@@ -4,7 +4,6 @@ public class Usuario{
 	
 	private int id;
 	private String nomUsuario;
-	private String email;
 	private String username;
 	private String password;
 	private boolean activo;
@@ -20,12 +19,6 @@ public class Usuario{
 	}
 	public void setNomUsuario(String nomUsuario) {
 		this.nomUsuario = nomUsuario;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
 	}
 	public String getUsername() {
 		return username;

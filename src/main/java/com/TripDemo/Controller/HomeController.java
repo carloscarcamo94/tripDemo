@@ -34,7 +34,7 @@ public class HomeController {
 		return "listado";
 	}
 	
-	@GetMapping ("trip/detalle")
+	@GetMapping ("/detalle")
 	public String mostrarDetalle(Model model) {
 		
 		Trip trip = new Trip();
@@ -42,7 +42,6 @@ public class HomeController {
 		trip.setDescripcion("Aventura extrema en un circuito conectado");
 		trip.setFecha(new Date());
 		trip.setCosto(10.0);
-		trip.setDireccion("Km 18 1/2, Carretera al Boquerón, Santa Tecla, La Libertad");
 		trip.setCalificacion(9);
 		model.addAttribute(trip);
 		
@@ -68,7 +67,6 @@ public class HomeController {
 			trip1.setDescripcion("Hacer rapel en circuito de Volcatenango");
 			trip1.setFecha(sdf.parse("02-025-2023"));
 			trip1.setCosto(10.0);
-			trip1.setDireccion("Km 18 1/2, Carretera al Boquerón, Santa Tecla, La Libertad");
 			trip1.setCalificacion(9);
 			
 			Trip trip2 = new Trip();
@@ -77,7 +75,6 @@ public class HomeController {
 			trip2.setDescripcion("Emocionante deslizadero en el restaurante Picnic");
 			trip2.setFecha(sdf.parse("07-09-2025"));
 			trip2.setCosto(5.0);
-			trip2.setDireccion("Km 3, Carretera al Boquerón, Santa Tecla");
 			trip2.setCalificacion(6);
 			
 			Trip trip3 = new Trip();
@@ -86,7 +83,6 @@ public class HomeController {
 			trip3.setDescripcion("Comida deliciosa mientras se disfruta un vivero natural");
 			trip3.setFecha(sdf.parse("07-09-2024"));
 			trip3.setCosto(25.0);
-			trip3.setDireccion("Carretera los Naranjos, 5, Sonsonate");
 			trip3.setCalificacion(7);
 			
 			Trip trip4 = new Trip();
@@ -95,7 +91,6 @@ public class HomeController {
 			trip4.setDescripcion("Hermosas caminatas por largos senderos rodeados de vegetación");
 			trip4.setFecha(sdf.parse("07-09-2023"));
 			trip4.setCosto(5.0);
-			trip4.setDireccion("Km 5, Carretera al Boquerón, Santa Tecla");
 			trip4.setCalificacion(6);
 			
 			lista.add(trip1);
