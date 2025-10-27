@@ -17,13 +17,17 @@ public class TripController {
 	@Autowired
 	private ITripService servicesTrip;
 	
-	@GetMapping("view/{id}")
+	@GetMapping("/view/{id}")
 	public String verDetalle(@PathVariable("id") int idTrip, Model model) {
-		
-		Trip trip = servicesTrip.buscarPorId(idTrip);
-		System.out.println("idTrip: " + trip.getId());
-		model.addAttribute("idTrip", trip.getId());
-		
-		return "trip/detalle";
+	    Trip trip = servicesTrip.buscarPorId(idTrip);
+	    
+	    if (trip == null) {
+	        System.out.println("No se encontró el trip con ID: " + idTrip);
+	        return "redirect:/"; // o mostrar una vista de error
+	    }
+
+	    model.addAttribute("trip", trip);
+	    return "trip/detalle";
 	}
+
 }

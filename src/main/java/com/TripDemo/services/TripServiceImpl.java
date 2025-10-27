@@ -71,12 +71,14 @@ public class TripServiceImpl implements ITripService {
 
 	@Override
 	public Trip buscarPorId(Integer idTrip) {
-		
-		for (Trip trip : lista)
-			if (trip.getId()==idTrip)
-				return trip;
-			
-		return null;
+	    if (lista == null) {
+	        buscarTodos(); // esto llenará la lista
+	    }
+	    for (Trip trip : lista)
+	        if (trip.getId() == idTrip)
+	            return trip;
+	    return null;
 	}
+
 	
 }
