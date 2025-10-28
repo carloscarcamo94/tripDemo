@@ -29,6 +29,7 @@ public class TripServiceImpl implements ITripService {
 				trip1.setFecha(sdf.parse("02-025-2023"));
 				trip1.setCosto(10.0);
 				trip1.setCalificacion(9);
+				trip1.setImagen("trip1.png");
 				
 				Trip trip2 = new Trip();
 				trip2.setId(2);
@@ -37,6 +38,7 @@ public class TripServiceImpl implements ITripService {
 				trip2.setFecha(sdf.parse("07-09-2025"));
 				trip2.setCosto(5.0);
 				trip2.setCalificacion(6);
+				trip2.setImagen("trip2.png");
 				
 				Trip trip3 = new Trip();
 				trip3.setId(3);
@@ -45,6 +47,7 @@ public class TripServiceImpl implements ITripService {
 				trip3.setFecha(sdf.parse("07-09-2024"));
 				trip3.setCosto(25.0);
 				trip3.setCalificacion(7);
+				trip3.setImagen("trip3.png");
 				
 				Trip trip4 = new Trip();
 				trip4.setId(4);
@@ -53,6 +56,7 @@ public class TripServiceImpl implements ITripService {
 				trip4.setFecha(sdf.parse("07-09-2023"));
 				trip4.setCosto(5.0);
 				trip4.setCalificacion(6);
+				trip4.setImagen("trip4.png");
 				
 				lista.add(trip1);
 				lista.add(trip2);

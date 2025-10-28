@@ -19,7 +19,11 @@ public class HomeController {
 	private ITripService tripService;
 	
 	@GetMapping ("/")
-	public String mostrarHome() {
+	public String mostrarHome(Model model) {
+		
+		List<Trip> lista = tripService.buscarTodos();
+		model.addAttribute("trips", lista);
+		
 		return "home";
 	}
 	
