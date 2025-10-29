@@ -20,13 +20,12 @@ public class TripController {
 	@GetMapping("/view/{id}")
 	public String verDetalle(@PathVariable("id") int idTrip, Model model) {
 	    Trip trip = servicesTrip.buscarPorId(idTrip);
-	    
 	    if (trip == null) {
-	        System.out.println("No se encontró el trip con ID: " + idTrip);
 	        return "redirect:/"; // o mostrar una vista de error
 	    }
 
 	    model.addAttribute("trip", trip);
+	    model.addAttribute("trips", servicesTrip.buscarTodos());
 	    return "trip/detalle";
 	}
 
