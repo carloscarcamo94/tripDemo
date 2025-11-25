@@ -2,31 +2,42 @@ package com.TripDemo.model;
 
 import java.util.Date;
 
-public class Categoria{
-	
+import org.springframework.format.annotation.DateTimeFormat;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+
+@Entity
+@Table(name = "categoria")
+public class Categoria {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String nomCategoria;
+	private String nombre;
 	private String descripcion;
 	private boolean activo;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
 	private Date fecha;
 	
-	public Date getFecha() {
-		return fecha;
-	}
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getNomCategoria() {
-		return nomCategoria;
+	public String getNombre() {
+		return nombre;
 	}
-	public void setNomCategoria(String nomCategoria) {
-		this.nomCategoria = nomCategoria;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 	public String getDescripcion() {
 		return descripcion;
@@ -40,6 +51,11 @@ public class Categoria{
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-	
+	public Date getFecha() {
+		return fecha;
+	}
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
 	
 }

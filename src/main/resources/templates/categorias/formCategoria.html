@@ -1,0 +1,74 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <title>TripApp | Categoría</title>
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+         <a class="navbar-brand" th:href="@{/}">TripApp</a>
+         <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" th:href="@{/categorias/index}">Volver a Categorías</a></li>
+            </ul>
+         </div>
+      </nav>
+    </header>
+
+    <main role="main" class="container" style="margin-top: 80px;">
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">Mantenimiento de Categorías</h4>
+        </div>
+        <div class="card-body">
+          
+          <form th:action="@{/categorias/save}" th:object="${categoria}" method="post">
+            
+            <input type="hidden" th:field="*{id}">
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" th:field="*{nombre}" required placeholder="Ej. Playa">
+              </div>
+              
+              <div class="col-md-6 mb-3">
+                <label for="fecha">Fecha de Registro</label>
+                <input type="date" class="form-control" th:field="*{fecha}" required>
+              </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                 <div class="form-check">
+                    <input class="form-check-input" type="checkbox" th:field="*{activo}" id="activo">
+                    <label class="form-check-label font-weight-bold" for="activo">
+                        Categoría Activa (Visible para los usuarios)
+                    </label>
+                 </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 mb-3">
+                <label for="descripcion">Descripción</label>
+                <textarea class="form-control" th:field="*{descripcion}" rows="3" placeholder="Breve descripción de la categoría"></textarea>
+              </div>
+            </div>
+
+            <hr>
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <a th:href="@{/categorias/index}" class="btn btn-secondary">Cancelar</a>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+  </body>
+</html>

@@ -72,7 +72,7 @@
             <img class="rounded mx-auto d-block" th:src="@{/images/{img} (img=${trip.imagen})} " alt="Generic placeholder image" width="220" height="190">            
           </div>
           <div class="col-md-9">
-            <h2 th:text=${trip.nomTrip}></h2>
+            <h2 th:text=${trip.nombre}></h2>
             <h6 class="card-title"><strong>Categoría: </strong> <span>Aventura</span></h6>
             <h6 class="card-title"><strong>Publicado: </strong> <span th:text=${trip.fecha}></span></h6>                
             <p th:text=${trip.descripcion}></p>

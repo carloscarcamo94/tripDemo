@@ -7,7 +7,7 @@
     <meta name="author" content="TripApp">
     <link rel="icon" href="favicon.ico">
 
-    <title th:text="'TripApp | ' + ${trip.nomTrip}"></title>
+    <title th:text="'TripApp | ' + ${trip.nombre}"></title>
 
     <!-- Bootstrap core CSS -->
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
@@ -52,12 +52,12 @@
         <div class="col-md-5 text-center">
           <img class="rounded img-fluid shadow-sm mb-4" 
                th:src="@{/images/{img}(img=${trip.imagen})}" 
-               th:alt="${trip.nomTrip}">
+               th:alt="${trip.nombre}">
         </div>
 
         <!-- Información del Trip -->
         <div class="col-md-7">
-          <h2 class="font-weight-bold text-uppercase mb-3" th:text="${trip.nomTrip}"></h2>
+          <h2 class="font-weight-bold text-uppercase mb-3" th:text="${trip.nombre}"></h2>
           <h6 class="text-muted mb-2">
             <strong>Publicado: </strong>
             <span th:text="${#dates.format(trip.fecha, 'dd MMM yyyy')}"></span>

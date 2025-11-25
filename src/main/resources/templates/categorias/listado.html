@@ -1,0 +1,100 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>TripApp | Listado de Categorías</title>
+
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+  </head>
+
+  <body>
+
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" th:href="@{/}">TripApp</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div th:if="${msg != null}" class="alert alert-success alert-dismissible fade show" role="alert">
+  			<span th:text="${msg}"></span>
+  			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    			<span aria-hidden="true">&times;</span>
+  			</button>
+		</div>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/}">Inicio</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" th:href="@{/categorias}">Categorías</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main role="main" class="container" style="margin-top: 80px;">
+
+      <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+          <h4 class="mb-0">Listado de Categorías</h4>
+			<a th:href="@{/categorias/create}" class="btn btn-primary btn-sm">Nueva Categoría</a>
+        </div>
+        
+        <div class="card-body p-0">
+          <table class="table table-hover table-striped mb-0">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Estatus</th>
+                <th scope="col" class="text-center">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="cat : ${categorias}">
+                <td th:text="${cat.id}"></td>
+                <td class="font-weight-bold" th:text="${cat.nombre}"></td>
+                <td th:text="${cat.descripcion}"></td>
+                
+                <td>
+                    <span th:if="${cat.activo}" class="badge badge-success">Activa</span>
+                    <span th:unless="${cat.activo}" class="badge badge-danger">Inactiva</span>
+                </td>
+                
+                <td class="text-center">
+  					<a th:href="@{/categorias/edit/{id} (id=${cat.id})}" class="btn btn-warning btn-sm" title="Editar">Editar</a>
+
+ 					<a th:href="@{/categorias/delete/{id} (id=${cat.id})}" 
+     				onclick="return confirm('¿Estás seguro de eliminar esta categoría?')" 
+     				class="btn btn-danger btn-sm" title="Eliminar">Eliminar</a>
+				</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <div th:if="${categorias.empty}" class="alert alert-warning text-center m-3">
+            No hay categorías registradas en la base de datos.
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="footer bg-dark text-light mt-auto py-3">
+      <div class="container text-center">
+        <p class="mb-0">&copy; 2025 TripApp, Inc. | Módulo de Categorías</p>
+      </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+  </body>
+</html>

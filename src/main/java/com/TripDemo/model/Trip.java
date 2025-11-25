@@ -2,48 +2,52 @@ package com.TripDemo.model;
 
 import java.util.Date;
 
-public class Trip{
+import org.springframework.format.annotation.DateTimeFormat;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+
+@Entity
+@Table(name = "trip")
+public class Trip {
 	
-	private Integer id;
-	private String nomTrip;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	private String nombre;
 	private String descripcion;
-	private Double costo;
-	private int calificacion;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
+	private Date fecha;
+	private double costo;
+	private String estatus;
 	private String imagen;
 	private String detalles;
-	private boolean activo;
-	private Date fecha;
-
+	private int calificacion;
 	
-	public String getImagen() {
-		return imagen;
-	}
-	public void setImagen(String imagen) {
-		this.imagen = imagen;
-	}
-	public String getDetalles() {
-		return detalles;
-	}
-	public void setDetalles(String detalles) {
-		this.detalles = detalles;
-	}
-	public boolean isActivo() {
-		return activo;
-	}
-	public void setActivo(boolean activo) {
-		this.activo = activo;
-	}
-	public Integer getId() {
+	@OneToOne
+	@JoinColumn(name = "idCategoria")
+	private Categoria categoria;
+
+	public int getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
-	public String getNomTrip() {
-		return nomTrip;
+	public String getNombre() {
+		return nombre;
 	}
-	public void setNomTrip(String nomTrip) {
-		this.nomTrip = nomTrip;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 	public String getDescripcion() {
 		return descripcion;
@@ -57,11 +61,35 @@ public class Trip{
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	public Double getCosto() {
+	public double getCosto() {
 		return costo;
 	}
-	public void setCosto(Double costo) {
+	public void setCosto(double costo) {
 		this.costo = costo;
+	}
+	public String getEstatus() {
+		return estatus;
+	}
+	public void setEstatus(String estatus) {
+		this.estatus = estatus;
+	}
+	public String getImagen() {
+		return imagen;
+	}
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+	public String getDetalles() {
+		return detalles;
+	}
+	public void setDetalles(String detalles) {
+		this.detalles = detalles;
+	}
+	public Categoria getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 	public int getCalificacion() {
 		return calificacion;
@@ -69,13 +97,4 @@ public class Trip{
 	public void setCalificacion(int calificacion) {
 		this.calificacion = calificacion;
 	}
-	
-	
-	@Override
-	public String toString() {
-		return "Trip [id=" + id + ", nomTrip=" + nomTrip + ", descripcion=" + descripcion + ", fecha=" + fecha
-				+ ", costo=" + costo + ", calificacion=" + calificacion + "]";
-	}
-
-	
 }

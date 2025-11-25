@@ -9,4 +9,5 @@ public interface ITripService {
 	//Método para buscar todos los trips
 	public List<Trip> buscarTodos();
 	public Trip buscarPorId(Integer idTrip);
+	void guardar(Trip trip);
 }
