@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.TripDemo.model.Categoria;
 import com.TripDemo.model.Trip;
@@ -55,13 +56,48 @@ public class TripController {
 	}
 	
 	@PostMapping("/save")
-	public String guardar(@ModelAttribute Trip trip) {
-		
-		// 1. Guardamos el objeto Trip en la base de datos usando el servicio
+	public String guardar(@ModelAttribute Trip trip, RedirectAttributes attributes) {
 		servicesTrip.guardar(trip);
 		
-		// 2. Redirigimos al listado principal (o a la tabla) para ver el resultado
-		return "redirect:/"; 
+		// Agregamos el mensaje flash
+		attributes.addFlashAttribute("msg", "¡Registro guardado exitosamente!");
+		
+		return "redirect:/trips/index"; // Redirigimos a la tabla de Trips
+	}
+	
+	// 1. Método para mostrar el formulario de EDICIÓN
+    @GetMapping("/edit/{id}")
+    public String editar(@PathVariable("id") int idTrip, Model model) {
+        // Buscamos el trip existente
+        Trip trip = servicesTrip.buscarPorId(idTrip);
+        
+        // Lo pasamos al modelo (el formulario se llenará solo gracias al binding)
+        model.addAttribute("trip", trip);
+        
+        // ¡IMPORTANTE! Hay que volver a cargar las categorías para el <select>
+        List<Categoria> listaCategorias = servicesCategoria.buscarTodas();
+        model.addAttribute("categorias", listaCategorias);
+        
+        return "trip/formTrip"; // Reusamos el mismo formulario
+    }
+
+    // 2. Método para ELIMINAR
+    @GetMapping("/delete/{id}")
+	public String eliminar(@PathVariable("id") int idTrip, RedirectAttributes attributes) {
+		servicesTrip.eliminar(idTrip);
+		
+		// Agregamos el mensaje flash
+		attributes.addFlashAttribute("msg", "¡Registro eliminado exitosamente!");
+		
+		return "redirect:/trips/index";
+	}
+	
+	@GetMapping("/index")
+	public String mostrarIndex(Model model) {
+		List<Trip> lista = servicesTrip.buscarTodos();
+		model.addAttribute("trips", lista);
+		
+		return "trip/tabla";
 	}
 
 }

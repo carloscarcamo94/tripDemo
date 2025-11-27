@@ -10,4 +10,5 @@ public interface ITripService {
 	public List<Trip> buscarTodos();
 	public Trip buscarPorId(Integer idTrip);
 	void guardar(Trip trip);
+	void eliminar(Integer idTrip);
 }

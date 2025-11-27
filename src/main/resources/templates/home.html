@@ -8,9 +8,7 @@
     <link rel="icon" href="favicon.ico">
 
     <title>TripApp | Aplicación para publicar Ofertas de Vacil en El Salvador.</title>
-    <!-- Bootstrap core CSS -->
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-    <!-- Custom styles for this template -->
     <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
     <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
   </head>
@@ -19,22 +17,21 @@
 
     <header>
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">TripApp</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" th:href="@{/}">TripApp</a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link active" href="#">Inicio</a>
+              <a class="nav-link active" th:href="@{/}">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Menu 1</a>
+              <a class="nav-link" th:href="@{/trips/index}">Trips</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Menu 2</a>
-            </li>          
+              <a class="nav-link" th:href="@{/categorias/index}">Categorías</a>
+            </li>         
           </ul>  
           <a class="btn btn-primary" href="#">Ingresar</a>&nbsp;
           <a class="btn btn-primary" href="#">Registrarse</a>
@@ -44,7 +41,6 @@
 
     <main role="main">
 
-      <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
         <div class="container">
           <h3>Encuentra los mejores Trips en El Salvador.</h3>
@@ -72,30 +68,35 @@
             <img class="rounded mx-auto d-block" th:src="@{/images/{img} (img=${trip.imagen})} " alt="Generic placeholder image" width="220" height="190">            
           </div>
           <div class="col-md-9">
-            <h2 th:text=${trip.nombre}></h2>
-            <h6 class="card-title"><strong>Categoría: </strong> <span>Aventura</span></h6>
-            <h6 class="card-title"><strong>Publicado: </strong> <span th:text=${trip.fecha}></span></h6>                
-            <p th:text=${trip.descripcion}></p>
+            <h2 th:text="${trip.nombre}"></h2>
+            
+            <h6 class="card-title">
+                <strong>Categoría: </strong> 
+                <span th:if="${trip.categoria != null}" th:text="${trip.categoria.nombre}"></span>
+                <span th:unless="${trip.categoria != null}" class="text-danger">Sin Categoría</span>
+            </h6>
+            
+            <h6 class="card-title">
+                <strong>Publicado: </strong> 
+                <span th:text="${#dates.format(trip.fecha, 'dd-MM-yyyy')}"></span>
+            </h6>                
+            
+            <p th:text="${trip.descripcion}"></p>
             <p><a class="btn btn-secondary" th:href="@{'/trips/view/' + ${trip.id}}" role="button"> Ver detalles &raquo;</a></p>            
           </div>
         </div>  
           <hr>	
-      </div> <!-- /container -->
-
-    </main>
+      </div> </main>
 
     <footer class="footer">
       <div class="container">
         <p>
-          &copy; 2022 TripApp, Inc. | WebApp Desarrollada con Spring Boot 2.1.2 | Demo Clase | &middot; <a href="#">Privacy</a>
+          &copy; 2025 TripApp, Inc. | WebApp Desarrollada con Spring Boot | Demo Clase | &middot; <a href="#">Privacy</a>
           &middot; <a href="#">Terms</a>
         </p>
       </div>
     </footer>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
   </body>

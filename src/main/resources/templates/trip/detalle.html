@@ -32,10 +32,10 @@
               <a class="nav-link active" th:href="@{/}">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Menú 1</a>
+              <a class="nav-link" th:href="@{/trips/index}">Trips</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Menú 2</a>
+              <a class="nav-link" th:href="@{/categorias/index}">Categorías</a>
             </li>
           </ul>
           <a class="btn btn-primary" href="#">Ingresar</a>&nbsp;
@@ -63,7 +63,9 @@
             <span th:text="${#dates.format(trip.fecha, 'dd MMM yyyy')}"></span>
           </h6>
           <h6 class="text-muted mb-3">
-            <strong>Categoría:</strong> Aventura
+            <strong>Categoría:</strong> 
+            <span th:if="${trip.categoria != null}" th:text="${trip.categoria.nombre}"></span>
+            <span th:unless="${trip.categoria != null}" class="text-danger">Sin Categoría</span>
           </h6>
           <p class="lead" th:text="${trip.descripcion}"></p>
 
@@ -92,7 +94,7 @@
         <div class="row text-center">
           <div class="col-md-3" th:each="t : ${trips}">
             <img class="rounded img-fluid mb-2" th:src="@{/images/{img}(img=${t.imagen})}" alt="trip" width="180" height="150">
-            <h6 th:text="${t.nomTrip}"></h6>
+            <h6 th:text="${t.nombre}"></h6>
             <a th:href="@{'/trips/view/' + ${t.id}}" class="btn btn-outline-primary btn-sm mt-1">Ver detalles</a>
           </div>
         </div>

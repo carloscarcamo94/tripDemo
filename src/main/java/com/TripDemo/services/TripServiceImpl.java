@@ -37,6 +37,11 @@ public class TripServiceImpl implements ITripService {
 		tripRepo.save(trip);
 	}
 	
+	@Override
+	public void eliminar(Integer idTrip) {
+	    tripRepo.deleteById(idTrip);
+	}
+	
 //	List<Trip> lista = null;
 	
 //	@Override

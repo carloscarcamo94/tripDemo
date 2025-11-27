@@ -61,13 +61,5 @@ public class HomeController {
 		return "trip/detalle";
 	}
 	
-	@GetMapping("/tabla")
-	public String mostrarTabla(Model model) {
-		List<Trip> lista = tripService.buscarTodos();
-		model.addAttribute("trips", lista);
-		
-		return "trip/tabla";
-	}
-	
 	
 }

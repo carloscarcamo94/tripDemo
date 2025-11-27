@@ -1,6 +1,7 @@
 package com.TripDemo.services;
 
 import java.util.List;
+
 import com.TripDemo.model.Categoria;
 
 public interface ICategoriaService {
