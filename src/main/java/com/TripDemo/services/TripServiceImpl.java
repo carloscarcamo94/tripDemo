@@ -42,6 +42,16 @@ public class TripServiceImpl implements ITripService {
 	    tripRepo.deleteById(idTrip);
 	}
 	
+	@Override
+	public List<Trip> buscarPorDescripcion(String descripcion) {
+		return tripRepo.findByDescripcionContaining(descripcion);
+	}
+
+	@Override
+	public List<Trip> buscarPorCategoria(Integer idCategoria) {
+		return tripRepo.findByCategoriaId(idCategoria);
+	}
+	
 //	List<Trip> lista = null;
 	
 //	@Override

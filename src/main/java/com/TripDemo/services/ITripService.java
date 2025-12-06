@@ -11,4 +11,7 @@ public interface ITripService {
 	public Trip buscarPorId(Integer idTrip);
 	void guardar(Trip trip);
 	void eliminar(Integer idTrip);
+	
+	List<Trip> buscarPorDescripcion(String descripcion);
+	List<Trip> buscarPorCategoria(Integer idCategoria);
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.TripDemo.model.Categoria;
 import com.TripDemo.model.Trip;
@@ -26,11 +27,41 @@ public class HomeController {
 	@GetMapping ("/")
 	public String mostrarHome(Model model) {
 		
-		List<Trip> lista = tripService.buscarTodos();
-		model.addAttribute("trips", lista);
-		
-		return "home";
+		// 1. Cargamos los trips (puedes filtrar solo los 'Activos' si quieres)
+        List<Trip> lista = tripService.buscarTodos();
+        model.addAttribute("trips", lista);
+        
+        // 2. ¡IMPORTANTE! Cargamos las categorías para el buscador
+        List<com.TripDemo.model.Categoria> categorias = serviceCategorias.buscarTodas();
+        model.addAttribute("categorias", categorias);
+        
+        return "home";
 	}
+	
+    @GetMapping("/search")
+    public String buscar(@RequestParam(name="query", required=false) String query, 
+                         @RequestParam(name="idCategoria", required=false) Integer idCategoria, 
+                         Model model) {
+        
+        List<Trip> lista = null;
+        
+        // Lógica simple de filtrado (Prioridad: Categoría > Descripción > Todo)
+        // Puedes combinarla si quieres hacer búsquedas más complejas
+        if (idCategoria != null && idCategoria > 0) {
+            lista = tripService.buscarPorCategoria(idCategoria);
+        } else if (query != null && !query.isEmpty()) {
+            lista = tripService.buscarPorDescripcion(query);
+        } else {
+            lista = tripService.buscarTodos();
+        }
+        
+        model.addAttribute("trips", lista);
+        
+        // Devolvemos también las categorías para que el select no se quede vacío tras buscar
+        model.addAttribute("categorias", serviceCategorias.buscarTodas());
+        
+        return "home";
+    }
 	
 //	@GetMapping ("/categorias")
 //	public String mostrarListado(Model model) {

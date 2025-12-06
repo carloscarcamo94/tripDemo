@@ -1,5 +1,9 @@
 package com.TripDemo.Controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +14,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.TripDemo.model.Categoria;
 import com.TripDemo.model.Trip;
 import com.TripDemo.services.ICategoriaService;
 import com.TripDemo.services.ITripService;
+
 
 @Controller
 @RequestMapping("/trips")
@@ -56,13 +63,33 @@ public class TripController {
 	}
 	
 	@PostMapping("/save")
-	public String guardar(@ModelAttribute Trip trip, RedirectAttributes attributes) {
+	public String guardar(@ModelAttribute Trip trip, 
+			              @RequestParam("archivoImagen") MultipartFile multiPart, 
+			              RedirectAttributes attributes) {
+		
+		if (!multiPart.isEmpty()) {
+			// Path relativo a la carpeta del proyecto (donde está el pom.xml)
+			// Guardamos en src/main/resources/static/images para que se vea "al instante" (en desarrollo)
+			// NOTA: En producción esto se hace diferente (ruta absoluta externa)
+			Path directorioImagenes = Paths.get("src//main//resources//static//images");
+			String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+			
+			try {
+				byte[] bytesImg = multiPart.getBytes();
+				Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + multiPart.getOriginalFilename());
+				Files.write(rutaCompleta, bytesImg);
+				
+				// Asignamos el nombre de la imagen al objeto Trip
+				trip.setImagen(multiPart.getOriginalFilename());
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		servicesTrip.guardar(trip);
-		
-		// Agregamos el mensaje flash
 		attributes.addFlashAttribute("msg", "¡Registro guardado exitosamente!");
-		
-		return "redirect:/trips/index"; // Redirigimos a la tabla de Trips
+		return "redirect:/trips/index";
 	}
 	
 	// 1. Método para mostrar el formulario de EDICIÓN

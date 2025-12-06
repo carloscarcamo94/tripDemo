@@ -40,9 +40,11 @@
         </div>
         <div class="card-body">
           
-          <form th:action="@{/trips/save}" th:object="${trip}" method="post">
+          <form th:action="@{/trips/save}" th:object="${trip}" method="post" enctype="multipart/form-data">
           
           	<input type="hidden" th:field="*{id}"> 
+          	
+          	<input type="hidden" th:field="*{imagen}">
             
             <div class="row">
               <div class="col-md-6 mb-3">
@@ -101,8 +103,11 @@
             <div class="row">
                 <div class="col-md-12 mb-3">
                     <label for="imagen">Nombre de la imagen (Ej: trip1.png)</label>
-                    <input type="text" class="form-control" id="imagen" th:field="*{imagen}" placeholder="nombre_archivo.png">
-                    <small class="text-muted">Asegúrate de que la imagen exista en la carpeta static/images</small>
+                    <input type="file" class="form-control-file" name="archivoImagen" id="archivoImagen">
+                    
+                    <small th:if="${trip.imagen != null}" class="form-text text-muted">
+                        Imagen actual: <span th:text="${trip.imagen}"></span>
+                    </small>
                 </div>
             </div>
 

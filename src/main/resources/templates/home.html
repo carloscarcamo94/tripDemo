@@ -45,15 +45,19 @@
         <div class="container">
           <h3>Encuentra los mejores Trips en El Salvador.</h3>
           Puedes buscar por descripción y categoría.
-          <form class="form-inline">
-            <input type="text" class="form-control mb-3" id="exampleFormControlInput1" placeholder="Escriba una búsqueda">&nbsp;
-            <select class="custom-select custom-select mb-3">
-              <option selected>Seleccione una categoría</option>
-              <option value="1">En la montaña</option>
-              <option value="2">En la Ciudad</option>
-              <option value="3">En los pueblos</option>
-              <option value="4">En las playas</option>
+          
+          <form class="form-inline" th:action="@{/search}" method="get">
+            
+            <input type="text" name="query" class="form-control mb-3" id="exampleFormControlInput1" placeholder="Escriba una búsqueda">&nbsp;
+            
+            <select name="idCategoria" class="custom-select custom-select mb-3">
+              <option value="">Seleccione una categoría</option>
+              
+              <option th:each="cat : ${categorias}" 
+                      th:value="${cat.id}" 
+                      th:text="${cat.nombre}"></option>
             </select>&nbsp;
+            
             <button type="submit" class="btn btn-primary mb-3">Buscar</button>
           </form>
         </div>
